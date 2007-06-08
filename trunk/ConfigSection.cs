@@ -37,14 +37,14 @@ namespace HtmlCleaner
             {
                 string configFile = ConfigurationManager.AppSettings["HtmlCleanerConfigFile"];
                 if (string.IsNullOrEmpty(configFile))
-                    configFile = "patterns.xml";
-                
+                    configFile = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\') + "\\patterns.xml";
+
                 XmlDocument doc = new XmlDocument();
                 try
                 {
                     doc.Load(configFile);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     throw new ConfigurationErrorsException("Couldn't find Patterns.xml file");
                 }
