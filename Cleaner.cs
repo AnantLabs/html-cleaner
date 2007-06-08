@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HtmlCleaner
 {
-    public class HtmlCleaner
+    public class Cleaner
     {
         /// <summary>
         /// Runs the named pattern from the patterns.xml file

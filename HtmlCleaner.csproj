@@ -36,7 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigSection.cs" />
-    <Compile Include="HtmlCleaner.cs" />
+    <Compile Include="Cleaner.cs" />
     <Compile Include="HtmlCleanerTest.cs" />
     <Compile Include="PatternElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
