@@ -1,0 +1,5 @@
+bin\Debug\HtmlCleaner.dll
+bin\Debug\HtmlCleaner.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\HtmlCleaner.dll
+obj\Debug\HtmlCleaner.pdb
