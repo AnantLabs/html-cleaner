@@ -1,5 +1,0 @@
-﻿<patterns>
-	<pattern name="test">
-		<![CDATA[<div>(?<test>.+)</div>]]>
-	</pattern>
-</patterns>
