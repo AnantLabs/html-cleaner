@@ -6,31 +6,53 @@ using System.Configuration;
 using System.Xml;
 namespace HtmlCleaner
 {
-    public class ConfigSection 
+    internal class ConfigSection 
     {
-        private static PatternCollection _patterns;
-        public static PatternCollection Patterns
+        private static Dictionary <string, PatternElement> _patterns;
+        public static Dictionary<string, PatternElement> Patterns
         {
             get
             {
                 if(_patterns == null)
                 {
-                    try
-                    {
-                        XmlDocument doc = new XmlDocument();
-                        if(!File.Exists("Patterns.xml"))
-                            throw new ConfigurationErrorsException("Couldn't find Patterns.xml file");
-                        
-                        doc.Load("Patterns.xml");
-                        XmlNodeList nodes = doc.GetElementsByTagName("pattern");
-                        foreach (XmlNode node in nodes)
-                        {
-                            
-                        }
+                    XmlNodeList nodes = ConfigXml.GetElementsByTagName("regex");
+                    _patterns = new Dictionary<string, PatternElement>();
 
+                    foreach (XmlNode node in nodes)
+                    {
+                        PatternElement pattern = new PatternElement(node.Attributes["name"].Value);
+                        pattern.Pattern = node.SelectSingleNode("pattern").InnerText;
+                        pattern.ReplaceString = node.SelectSingleNode("replace").InnerText;
+                        _patterns.Add(pattern.Name, pattern);
                     }
+
+                    
                 }
+                return _patterns;
             }
         }
+        protected static XmlDocument ConfigXml
+        {
+            get
+            {
+                string configFile = ConfigurationManager.AppSettings["HtmlCleanerConfigFile"];
+                if (string.IsNullOrEmpty(configFile))
+                    configFile = "patterns.xml";
+                
+                XmlDocument doc = new XmlDocument();
+                try
+                {
+                    doc.Load(configFile);
+                }
+                catch(Exception)
+                {
+                    throw new ConfigurationErrorsException("Couldn't find Patterns.xml file");
+                }
+                if (doc.DocumentElement == null)
+                    throw new ConfigurationErrorsException("Couldn't find Patterns.xml file");
+                return doc;
+            }
+        }
+
     }
 }
