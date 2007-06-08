@@ -7,21 +7,30 @@ namespace HtmlCleaner
 {
     public class HtmlCleaner
     {
-        private static ConfigSection section = ConfigurationManager.GetSection("HtmlCleaner") as ConfigSection;
+        /// <summary>
+        /// Runs the named pattern from the patterns.xml file
+        /// against the input html
+        /// </summary>
+        /// <param name="html">The html to clean</param>
+        /// <param name="patternToRun">The name of the pattern to run</param>
+        /// <returns>The cleaned html</returns>
         public static string CleanHtml(string html, string patternToRun)
         {
-            //If the config section doesn't exist, then give up
-            if (section == null)
-                throw new Exception("HtmlCleaner configSetting does not exist");
+            return ConfigSection.Patterns[patternToRun].Replace(html);
+        }
 
-            foreach (PatternElement pattern in section.Patterns)
+        /// <summary>
+        /// Runs all the patterns configured in the patterns.xml file
+        /// against the input html
+        /// </summary>
+        /// <param name="html">The html to clean</param>
+        /// <returns>The cleaned html</returns>
+        public static string CleanHtml(string html)
+        {
+            foreach (PatternElement pattern in ConfigSection.Patterns.Values)
             {
-                if (pattern.Name == patternToRun)
-                {
-                    html       
-                }
+                html = pattern.Replace(html);
             }
-
             return html;
         }
     }

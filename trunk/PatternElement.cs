@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Text.RegularExpressions;
 namespace HtmlCleaner
 {
-    public class PatternElement 
+    internal class PatternElement 
     {
         private string _pattern;
         private string _name;
@@ -20,7 +20,10 @@ namespace HtmlCleaner
         {
             Name = name;
         }
-        
+        public string Replace(string html)
+        {
+            return CompiledRegex.Replace(html, ReplaceString);
+        }
         public Regex CompiledRegex
         {
             get

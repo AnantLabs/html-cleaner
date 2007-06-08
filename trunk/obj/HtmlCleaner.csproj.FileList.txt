@@ -3,3 +3,6 @@ bin\Debug\HtmlCleaner.pdb
 obj\Debug\ResolveAssemblyReference.cache
 obj\Debug\HtmlCleaner.dll
 obj\Debug\HtmlCleaner.pdb
+bin\Debug\nunit.framework.dll
+bin\Debug\nunit.framework.xml
+bin\Debug\HtmlCleaner.dll.config
